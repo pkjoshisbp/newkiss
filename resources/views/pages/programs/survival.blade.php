@@ -191,7 +191,9 @@
             <div class="row g-4">
                 @php
                     $locations = App\Models\Location::with(['pricingPlans' => function($query) {
-                        $query->where('program_name', 'Survival Program');
+                        $query->where('is_active', true)->whereHas('program', function($q){
+                            $q->where('slug', 'survival');
+                        })->with('program');
                     }])->where('is_active', true)->orderBy('sort_order')->get();
                 @endphp
                 

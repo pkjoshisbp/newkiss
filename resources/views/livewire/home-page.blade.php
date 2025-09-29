@@ -1,34 +1,8 @@
 <div>
-    {{-- Hero Banner --}}
-    <section class="hero-banner">
-        <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="row align-items-center min-vh-75">
-                <div class="col-lg-8">
-                    <h1 class="display-3 fw-bold text-white mb-4">
-                        Learn to Swim, Float & Survive
-                    </h1>
-                    <p class="lead text-white mb-4">
-                        Professional swimming lessons focused on water safety and survival skills for children and adults across Northeast Ohio.
-                    </p>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="/programs/survival" class="btn btn-primary btn-lg px-4 py-3">
-                            <i class="fas fa-swimmer me-2"></i>Survival Program
-                        </a>
-                        <a href="/programs/continuing" class="btn btn-outline-light btn-lg px-4 py-3">
-                            <i class="fas fa-graduation-cap me-2"></i>Continuing Education
-                        </a>
-                        <a href="https://momence.com/kiss-aquatics" target="_blank" class="btn btn-accent btn-lg px-4 py-3">
-                            <i class="fas fa-calendar-alt me-2"></i>Book Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @livewire('hero-section')
 
     {{-- Programs Overview --}}
-    <section class="py-5 bg-light">
+    <section class="py-5 bg-light section-over-hero">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center mb-5">
@@ -38,9 +12,9 @@
                     </p>
                 </div>
             </div>
-            <div class="row g-4">
-                @foreach($programs as $program)
-                <div class="col-md-6">
+            <div class="row g-4 justify-content-center">
+                @foreach($programs->take(2) as $program)
+                <div class="col-md-6 col-lg-5">
                     <div class="card h-100 shadow-hover program-card">
                         @if($program->image_path)
                         <img src="{{ Storage::url($program->image_path) }}" class="card-img-top" alt="{{ $program->name }}">
@@ -184,25 +158,11 @@
 
 @push('styles')
 <style>
-.hero-banner {
-    background: linear-gradient(135deg, rgba(74, 144, 226, 0.9), rgba(92, 189, 200, 0.8)), 
-                url('/target-look.jpg') center/cover;
-    position: relative;
-    min-height: 75vh;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.min-vh-75 {
-    min-height: 75vh;
-}
+/* Curved hero visuals */
+.hero-curve { background: linear-gradient(135deg, #0b3c5d, #2f7ec6); }
+.hero-curve .carousel-item img { height: 360px; object-fit: cover; }
+.curve-top, .curve-bottom { z-index: 0; }
+.hero-curve .container { position: relative; z-index: 1; }
 
 .shadow-hover {
     transition: all 0.3s ease;

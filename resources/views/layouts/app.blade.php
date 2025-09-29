@@ -43,6 +43,19 @@
     
     <!-- Custom Styles -->
     @stack('styles')
+    
+        <!-- Parallax Background Styles -->
+        <style>
+            .parallax {
+                background-image: url('path/to/your/image.jpg');
+                height: 100vh;
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
+
 </head>
 <body>
     <!-- Header -->
@@ -50,11 +63,7 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('target-look.jpg') }}" alt="K.I.S.S. Aquatics" height="50" class="me-2 rounded">
-                <div>
-                    <div class="fw-bold text-kiss-blue">K.I.S.S. AQUATICS</div>
-                    <small class="text-muted">Safety & Survival Swim</small>
-                </div>
+                <img src="{{ asset('images/kiss-logo.png') }}" alt="K.I.S.S. Aquatics" height="56" class="me-2">
             </a>
             
             <!-- Mobile Toggle -->
@@ -261,6 +270,15 @@
                 }
             });
         });
+        
+            // Parallax effect
+            window.addEventListener('scroll', function() {
+                const parallax = document.querySelector('.parallax');
+                if (parallax) {
+                    const scrollPosition = window.pageYOffset;
+                    parallax.style.backgroundPositionY = (scrollPosition * 0.5) + 'px';
+                }
+            });
     </script>
     
     <!-- Custom Scripts -->

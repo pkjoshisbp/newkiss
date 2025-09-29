@@ -17,7 +17,9 @@
 
     {{-- Pricing by Location --}}
     @php
-        $locations = App\Models\Location::with('pricingPlans')->where('is_active', true)->orderBy('sort_order')->get();
+        $locations = App\Models\Location::with(['pricingPlans' => function($q){
+            $q->where('is_active', true)->with('program');
+        }])->where('is_active', true)->orderBy('sort_order')->get();
     @endphp
 
     <div class="row g-4">
@@ -32,7 +34,8 @@
                 </div>
                 <div class="card-body">
                     @if($location->pricingPlans->count() > 0)
-                        @foreach($location->pricingPlans->groupBy('program_name') as $programName => $plans)
+                        @php $grouped = $location->pricingPlans->groupBy(function($plan){ return optional($plan->program)->name ?? 'Program'; }); @endphp
+                        @foreach($grouped as $programName => $plans)
                         <div class="mb-4">
                             <h4 class="text-secondary border-bottom pb-2 mb-3">{{ $programName }}</h4>
                             @foreach($plans as $plan)
