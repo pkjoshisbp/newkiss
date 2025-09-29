@@ -1,8 +1,354 @@
 // Import custom variables first
+// Import our custom variables first
 @import 'variables';
 
-// Import Bootstrap
+// Import Bootstrap with our customizations
 @import '../../node_modules/bootstrap/scss/bootstrap';
+
+// Import Bootstrap JavaScript
+@import 'bootstrap';
+
+// Custom KISS Aquatics styles
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: $kiss-dark-blue;
+}
+
+// Header and Navigation
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: $kiss-primary-blue !important;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: $kiss-dark-blue !important;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+    
+    &:hover {
+        color: $kiss-secondary-teal !important;
+    }
+}
+
+// Hero Section
+.hero-section {
+    background: linear-gradient(135deg, $kiss-primary-blue 0%, $kiss-secondary-teal 100%);
+    color: white;
+    padding: 4rem 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    
+    .hero-content {
+        text-align: center;
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .lead {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+    }
+}
+
+// Program Cards
+.program-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    height: 100%;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba($kiss-primary-blue, 0.2);
+    }
+    
+    .card-header {
+        background: linear-gradient(45deg, $kiss-primary-blue, $kiss-secondary-teal);
+        color: white;
+        border-bottom: none;
+        padding: 1.5rem;
+        
+        h5 {
+            margin: 0;
+            font-weight: bold;
+        }
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .features-list {
+        list-style: none;
+        padding: 0;
+        
+        li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid $kiss-light-gray;
+            position: relative;
+            padding-left: 1.5rem;
+            
+            &:before {
+                content: '✓';
+                position: absolute;
+                left: 0;
+                color: $kiss-aqua;
+                font-weight: bold;
+            }
+            
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+// Pricing Tables
+.pricing-card {
+    border: 2px solid $kiss-light-blue;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        border-color: $kiss-secondary-teal;
+        transform: scale(1.02);
+    }
+    
+    .pricing-header {
+        background: $kiss-light-blue;
+        color: $kiss-dark-blue;
+        padding: 2rem 1rem;
+        text-align: center;
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: $kiss-primary-blue;
+        }
+        
+        .price-note {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+// Location Cards
+.location-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba($kiss-primary-blue, 0.1);
+    margin-bottom: 2rem;
+    transition: box-shadow 0.3s ease;
+    
+    &:hover {
+        box-shadow: 0 8px 25px rgba($kiss-primary-blue, 0.15);
+    }
+    
+    .location-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, $kiss-aqua, $kiss-secondary-teal);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+// Contact Form
+.contact-form {
+    background: $kiss-light-gray;
+    border-radius: 1rem;
+    padding: 2rem;
+    
+    .form-control {
+        border: 2px solid transparent;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        transition: border-color 0.3s ease;
+        
+        &:focus {
+            border-color: $kiss-secondary-teal;
+            box-shadow: 0 0 0 0.2rem rgba($kiss-secondary-teal, 0.25);
+        }
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, $kiss-primary-blue, $kiss-secondary-teal);
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+        
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba($kiss-primary-blue, 0.3);
+        }
+    }
+}
+
+// Video Player
+.video-container {
+    position: relative;
+    background: $kiss-dark-blue;
+    border-radius: 1rem;
+    overflow: hidden;
+    
+    .video-thumbnail {
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba($kiss-primary-blue, 0.9);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background: $kiss-secondary-teal;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+    }
+    
+    iframe {
+        width: 100%;
+        height: 315px;
+        border: none;
+    }
+}
+
+// Footer
+.footer {
+    background: $kiss-dark-blue;
+    color: white;
+    padding: 3rem 0 1rem;
+    
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        
+        li {
+            margin-bottom: 0.5rem;
+            
+            a {
+                color: $kiss-light-blue;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                
+                &:hover {
+                    color: $kiss-secondary-teal;
+                }
+            }
+        }
+    }
+    
+    .social-links {
+        a {
+            color: $kiss-light-blue;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            
+            &:hover {
+                color: $kiss-secondary-teal;
+            }
+        }
+    }
+}
+
+// FAQ Section
+.faq-item {
+    border: 1px solid $kiss-light-blue;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    
+    .faq-question {
+        background: $kiss-light-gray;
+        padding: 1rem;
+        margin: 0;
+        cursor: pointer;
+        border-radius: 0.5rem 0.5rem 0 0;
+        transition: background-color 0.3s ease;
+        
+        &:hover {
+            background: rgba($kiss-light-blue, 0.3);
+        }
+    }
+    
+    .faq-answer {
+        padding: 1rem;
+        background: white;
+        border-radius: 0 0 0.5rem 0.5rem;
+    }
+}
+
+// Utility Classes
+.text-kiss-blue { color: $kiss-primary-blue !important; }
+.text-kiss-teal { color: $kiss-secondary-teal !important; }
+.text-kiss-aqua { color: $kiss-aqua !important; }
+.bg-kiss-blue { background-color: $kiss-primary-blue !important; }
+.bg-kiss-teal { background-color: $kiss-secondary-teal !important; }
+.bg-kiss-light { background-color: $kiss-light-gray !important; }
+
+// Drowning Statistics Banner
+.drowning-stats {
+    background: linear-gradient(45deg, $kiss-orange, $kiss-yellow);
+    color: $kiss-dark-blue;
+    padding: 2rem 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+        }
+    }
+    
+    .program-card,
+    .pricing-card {
+        margin-bottom: 2rem;
+    }
+}
 
 // Custom KISS Aquatics styles
 body {
