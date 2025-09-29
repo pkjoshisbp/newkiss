@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\HomePage;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', HomePage::class)->name('home');
+
+// About routes
+Route::group(['prefix' => 'about'], function () {
+    Route::get('/locations', function () {
+        return view('pages.about.locations');
+    })->name('about.locations');
+    
+    Route::get('/pricing', function () {
+        return view('pages.about.pricing');
+    })->name('about.pricing');
+    
+    Route::get('/instructors', function () {
+        return view('pages.about.instructors');
+    })->name('about.instructors');
+    
+    Route::get('/rules', function () {
+        return view('pages.about.rules');
+    })->name('about.rules');
+    
+    Route::get('/videos', function () {
+        return view('pages.about.videos');
+    })->name('about.videos');
+    
+    Route::get('/qa', function () {
+        return view('pages.about.qa');
+    })->name('about.qa');
 });
+
+// Programs routes
+Route::group(['prefix' => 'programs'], function () {
+    Route::get('/survival', function () {
+        return view('pages.programs.survival');
+    })->name('programs.survival');
+    
+    Route::get('/continuing', function () {
+        return view('pages.programs.continuing');
+    })->name('programs.continuing');
+});
+
+// Contact route
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
