@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'K.I.S.S. Aquatics - Swimming Lessons for Water Safety & Survival' }}</title>
+    <title>@yield('title', $title ?? 'K.I.S.S. Aquatics - Swimming Lessons for Water Safety & Survival')</title>
     
     <!-- Meta Tags -->
-    <meta name="description" content="{{ $description ?? 'Learn essential water safety and survival swimming skills for all ages in Northeast Ohio. Professional swim instructors teaching children to swim, float, and survive.' }}">
+    <meta name="description" content="@yield('description', $description ?? 'Learn essential water safety and survival swimming skills for all ages in Northeast Ohio. Professional swim instructors teaching children to swim, float, and survive.')">
     <meta name="robots" content="{{ $robots ?? 'index,follow' }}">
     <meta name="author" content="K.I.S.S. Aquatics">
     
@@ -40,6 +40,9 @@
     
     <!-- Livewire Styles -->
     @livewireStyles
+    
+    <!-- Custom Styles -->
+    @stack('styles')
 </head>
 <body>
     <!-- Header -->
@@ -130,9 +133,14 @@
     </header>
 
     <!-- Main Content -->
-    <main>
-        {{ $slot }}
-    </main>
+            {{-- Main Content --}}
+        <main>
+            @isset($slot)
+                {{ $slot }}
+            @else
+                @yield('content')
+            @endisset
+        </main>
 
     <!-- Drowning Statistics Banner -->
     <section class="drowning-stats">
@@ -254,5 +262,8 @@
             });
         });
     </script>
+    
+    <!-- Custom Scripts -->
+    @stack('scripts')
 </body>
 </html>
