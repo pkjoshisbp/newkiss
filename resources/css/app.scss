@@ -1,12 +1,9 @@
-// Import custom variables first
-// Import our custom variables first
-@import 'variables';
+// Import our custom variables first (expose as global for convenience)
+@use 'variables' as *;
 
-// Import Bootstrap with our customizations
-@import '../../node_modules/bootstrap/scss/bootstrap';
+// Import Bootstrap with our customizations using modern @use
+@use '../../node_modules/bootstrap/scss/bootstrap' as *;
 
-// Import Bootstrap JavaScript
-@import 'bootstrap';
 
 // Custom KISS Aquatics styles
 body {

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\HomePage;
+use App\Livewire\Pages\About\{Locations as AboutLocations, Pricing as AboutPricing, Instructors as AboutInstructors, Rules as AboutRules, Videos as AboutVideos, QA as AboutQA};
+use App\Livewire\Pages\Programs\{Survival as ProgramsSurvival, Continuing as ProgramsContinuing};
+use App\Livewire\Pages\ContactPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,43 +21,19 @@ Route::get('/', HomePage::class)->name('home');
 
 // About routes
 Route::group(['prefix' => 'about'], function () {
-    Route::get('/locations', function () {
-        return view('pages.about.locations');
-    })->name('about.locations');
-    
-    Route::get('/pricing', function () {
-        return view('pages.about.pricing');
-    })->name('about.pricing');
-    
-    Route::get('/instructors', function () {
-        return view('pages.about.instructors');
-    })->name('about.instructors');
-    
-    Route::get('/rules', function () {
-        return view('pages.about.rules');
-    })->name('about.rules');
-    
-    Route::get('/videos', function () {
-        return view('pages.about.videos');
-    })->name('about.videos');
-    
-    Route::get('/qa', function () {
-        return view('pages.about.qa');
-    })->name('about.qa');
+    Route::get('/locations', AboutLocations::class)->name('about.locations');
+    Route::get('/pricing', AboutPricing::class)->name('about.pricing');
+    Route::get('/instructors', AboutInstructors::class)->name('about.instructors');
+    Route::get('/rules', AboutRules::class)->name('about.rules');
+    Route::get('/videos', AboutVideos::class)->name('about.videos');
+    Route::get('/qa', AboutQA::class)->name('about.qa');
 });
 
 // Programs routes
 Route::group(['prefix' => 'programs'], function () {
-    Route::get('/survival', function () {
-        return view('pages.programs.survival');
-    })->name('programs.survival');
-    
-    Route::get('/continuing', function () {
-        return view('pages.programs.continuing');
-    })->name('programs.continuing');
+    Route::get('/survival', ProgramsSurvival::class)->name('programs.survival');
+    Route::get('/continuing', ProgramsContinuing::class)->name('programs.continuing');
 });
 
 // Contact route
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
+Route::get('/contact', ContactPage::class)->name('contact');

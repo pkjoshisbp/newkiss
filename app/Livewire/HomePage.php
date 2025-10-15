@@ -26,7 +26,16 @@ class HomePage extends Component
             ->take(3)
             ->get();
 
-        return view('livewire.home-page', compact('programs', 'locations', 'featuredVideos'))
+        // Hero slides data (moved from HeroSection component)
+        $heroSlides = [
+            [ 'src' => asset('images/hero/Caden.jpg'), 'alt' => 'Caden' ],
+            [ 'src' => asset('images/hero/Sloane.jpg'), 'alt' => 'Sloane' ],
+            [ 'src' => asset('images/hero/KISS_Sizzle.jpg'), 'alt' => 'Sizzle' ],
+            [ 'src' => asset('images/hero/Lilianna.jpg'), 'alt' => 'Lilianna' ],
+            [ 'src' => asset('images/hero/Raegan.jpg'), 'alt' => 'Raegan' ],
+        ];
+
+        return view('livewire.home-page', compact('programs', 'locations', 'featuredVideos', 'heroSlides'))
             ->layout('layouts.app', [
                 'title' => 'K.I.S.S. Aquatics - Swimming Lessons for Water Safety & Survival',
                 'description' => 'Learn essential water safety and survival swimming skills for all ages in Northeast Ohio. Professional swim instructors teaching children to swim, float, and survive.'

@@ -1,5 +1,19 @@
 <div>
-    @livewire('hero-section')
+    {{-- Hero Section --}}
+    <section class="hero fw-hero position-relative overflow-hidden">
+        <!-- Background slider -->
+        <div class="hero-slider position-absolute top-0 start-0 w-100 h-100">
+            <div id="heroCarouselFull" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="6000">
+                <div class="carousel-inner h-100">
+                    @foreach($heroSlides as $i => $slide)
+                        <div class="carousel-item h-100 @if($i===0) active @endif">
+                            <div class="hero-bg" style="background-image: url('{{ $slide['src'] }}')"></div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{-- Programs Overview --}}
     <section class="py-5 bg-light section-over-hero">
@@ -154,16 +168,66 @@
             </div>
         </div>
     </section>
-</div>
 
-@push('styles')
+
+
 <style>
-/* Curved hero visuals */
-.hero-curve { background: linear-gradient(135deg, #0b3c5d, #2f7ec6); }
-.hero-curve .carousel-item img { height: 360px; object-fit: cover; }
-.curve-top, .curve-bottom { z-index: 0; }
-.hero-curve .container { position: relative; z-index: 1; }
+/* Hero Section Styles */
+.fw-hero { 
+    height: 78vh; 
+    min-height: 520px; 
+}
 
+.hero { 
+    background: transparent; 
+}
+
+.hero-slider { 
+    background-color: #0b3c5d; 
+    z-index: 1; 
+}
+
+.hero .hero-bg { 
+    position: absolute; 
+    inset: 0; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+/* Smooth crossfade */
+.carousel-fade .carousel-item { 
+    opacity: 0; 
+    transition: opacity 1.2s ease-in-out; 
+}
+
+.carousel-fade .carousel-item.active { 
+    opacity: 1; 
+}
+
+.carousel-fade .carousel-item-next.carousel-item-start,
+.carousel-fade .carousel-item-prev.carousel-item-end { 
+    opacity: 0; 
+}
+
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end { 
+    opacity: 1; 
+}
+
+/* Section styling */
+.section-over-hero { 
+    position: relative; 
+    z-index: 10; 
+}
+
+/* Responsive refinements */
+@media (max-width: 575.98px) {
+    .fw-hero { 
+        height: 68vh; 
+    }
+}
+
+/* Card hover effects */
 .shadow-hover {
     transition: all 0.3s ease;
 }
@@ -248,4 +312,8 @@
     transform: translateY(-2px);
 }
 </style>
-@endpush
+
+<script>
+// Hero carousel initialized by Bootstrap automatically
+</script>
+</div>

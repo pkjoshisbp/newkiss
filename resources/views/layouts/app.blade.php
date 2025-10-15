@@ -62,8 +62,8 @@
     <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
             <!-- Brand -->
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/kiss-logo.png') }}" alt="K.I.S.S. Aquatics" height="56" class="me-2">
+            <a class="navbar-brand d-flex align-items-center d-lg-none" href="{{ route('home') }}">
+                <img src="{{ asset('images/kiss-aquatics-logo.png') }}" alt="K.I.S.S. Aquatics" height="74" width="auto" class="me-2" style="max-width: 240px; height: 74px;">
             </a>
             
             <!-- Mobile Toggle -->
@@ -73,7 +73,7 @@
             
             <!-- Navigation -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav align-items-lg-center">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
                             <i class="bi bi-house-door me-1"></i> HOME
@@ -128,8 +128,8 @@
                         </a>
                     </li>
                     
-                    <!-- Book Now Button -->
-                    <li class="nav-item ms-2">
+                    <!-- Book Now Button (push to right on desktop) -->
+                    <li class="nav-item ms-2 ms-lg-auto">
                         <a href="{{ App\Models\SiteSetting::getValue('booking_url', 'https://momence.com') }}" 
                            target="_blank" 
                            class="btn btn-primary rounded-pill px-4">
