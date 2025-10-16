@@ -8,7 +8,7 @@ class QA extends Component
 {
     public function render()
     {
-        return view('pages.about.qa')
+        return view('livewire.pages.about.qa')
             ->layout('layouts.app', [
                 'title' => 'Q&A - K.I.S.S. Aquatics',
                 'description' => 'Frequently asked questions about K.I.S.S. Aquatics programs, policies, and scheduling.',

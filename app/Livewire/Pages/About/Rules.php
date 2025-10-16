@@ -8,7 +8,7 @@ class Rules extends Component
 {
     public function render()
     {
-        return view('pages.about.rules')
+        return view('livewire.pages.about.rules')
             ->layout('layouts.app', [
                 'title' => 'The Rules - K.I.S.S. Aquatics',
                 'description' => 'Guidelines and rules to ensure safe and effective swim lessons at K.I.S.S. Aquatics.',

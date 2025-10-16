@@ -8,7 +8,7 @@ class Instructors extends Component
 {
     public function render()
     {
-        return view('pages.about.instructors')
+        return view('livewire.pages.about.instructors')
             ->layout('layouts.app', [
                 'title' => 'Our Instructors - K.I.S.S. Aquatics',
                 'description' => 'Meet our experienced swim instructors dedicated to water safety and survival skills.',

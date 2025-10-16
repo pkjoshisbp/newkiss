@@ -6,17 +6,6 @@ use App\Livewire\Pages\About\{Locations as AboutLocations, Pricing as AboutPrici
 use App\Livewire\Pages\Programs\{Survival as ProgramsSurvival, Continuing as ProgramsContinuing};
 use App\Livewire\Pages\ContactPage;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', HomePage::class)->name('home');
 
 // About routes
@@ -37,3 +26,10 @@ Route::group(['prefix' => 'programs'], function () {
 
 // Contact route
 Route::get('/contact', ContactPage::class)->name('contact');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';

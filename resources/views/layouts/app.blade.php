@@ -43,29 +43,11 @@
     
     <!-- Custom Styles -->
     @stack('styles')
-    
-        <!-- Parallax Background Styles -->
-        <style>
-            .parallax {
-                background-image: url('path/to/your/image.jpg');
-                height: 100vh;
-                background-attachment: fixed;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-        </style>
-
 </head>
 <body>
     <!-- Header -->
-    <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <header class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top" style="background-color: #469EDE;">
         <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand d-flex align-items-center d-lg-none" href="{{ route('home') }}">
-                <img src="{{ asset('images/kiss-aquatics-logo.png') }}" alt="K.I.S.S. Aquatics" height="74" width="auto" class="me-2" style="max-width: 240px; height: 74px;">
-            </a>
-            
             <!-- Mobile Toggle -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -75,65 +57,50 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="bi bi-house-door me-1"></i> HOME
+                        <a class="nav-link text-white {{ request()->routeIs('home') ? 'fw-bold' : '' }}" href="{{ route('home') }}">
+                            HOME
                         </a>
                     </li>
                     
                     <!-- About Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('about.*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-info-circle me-1"></i> ABOUT
+                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('about.*') ? 'fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
+                            ABOUT
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('about.locations') }}">
-                                <i class="bi bi-geo-alt me-2"></i> Locations
-                            </a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.pricing') }}">
-                                <i class="bi bi-currency-dollar me-2"></i> Pricing
-                            </a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.instructors') }}">
-                                <i class="bi bi-people me-2"></i> Our Instructors
-                            </a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.rules') }}">
-                                <i class="bi bi-list-check me-2"></i> The Rules
-                            </a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.videos') }}">
-                                <i class="bi bi-play-circle me-2"></i> Videos
-                            </a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.qa') }}">
-                                <i class="bi bi-question-circle me-2"></i> Q&A
-                            </a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.locations') }}">Locations</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.pricing') }}">Pricing</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.instructors') }}">Our Instructors</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.rules') }}">The Rules</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.videos') }}">Videos</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.qa') }}">Q&A</a></li>
                         </ul>
                     </li>
                     
                     <!-- Programs Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('programs.*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-water me-1"></i> PROGRAMS
+                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('programs.*') ? 'fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
+                            PROGRAMS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('programs.survival') }}">
-                                <i class="bi bi-shield-check me-2"></i> Survival Program
-                            </a></li>
-                            <li><a class="dropdown-item" href="{{ route('programs.continuing') }}">
-                                <i class="bi bi-arrow-up me-2"></i> Continuing Education
-                            </a></li>
+                            <li><a class="dropdown-item" href="{{ route('programs.survival') }}">Survival Program</a></li>
+                            <li><a class="dropdown-item" href="{{ route('programs.continuing') }}">Continuing Education</a></li>
                         </ul>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            <i class="bi bi-envelope me-1"></i> CONTACT US
+                        <a class="nav-link text-white {{ request()->routeIs('contact') ? 'fw-bold' : '' }}" href="{{ route('contact') }}">
+                            CONTACT US
                         </a>
                     </li>
                     
-                    <!-- Book Now Button (push to right on desktop) -->
+                    <!-- Client Portal Button -->
                     <li class="nav-item ms-2 ms-lg-auto">
-                        <a href="{{ App\Models\SiteSetting::getValue('booking_url', 'https://momence.com') }}" 
+                        <a href="https://momence.com" 
                            target="_blank" 
-                           class="btn btn-primary rounded-pill px-4">
-                            <i class="bi bi-calendar-check me-1"></i> BOOK NOW
+                           class="btn rounded-pill px-4" 
+                           style="background-color: #F7CD45; color: #333;">
+                            CLIENT PORTAL
                         </a>
                     </li>
                 </ul>
@@ -142,22 +109,21 @@
     </header>
 
     <!-- Main Content -->
-            {{-- Main Content --}}
-        <main>
-            @isset($slot)
-                {{ $slot }}
-            @else
-                @yield('content')
-            @endisset
-        </main>
+    <main>
+        @isset($slot)
+            {{ $slot }}
+        @else
+            @yield('content')
+        @endisset
+    </main>
 
     <!-- Drowning Statistics Banner -->
-    <section class="drowning-stats">
+    <section class="drowning-stats py-3 bg-warning">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
                     <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <strong>{{ App\Models\SiteSetting::getValue('drowning_statistic', 'Drowning is the second leading cause of accidental death for children under 5') }}</strong>
+                    <strong>Drowning is the second leading cause of accidental death for children under 5</strong>
                 </div>
             </div>
         </div>
@@ -172,15 +138,11 @@
                     <h5 class="text-kiss-teal mb-3">Contact Information</h5>
                     <div class="mb-2">
                         <i class="bi bi-envelope me-2"></i>
-                        <a href="mailto:{{ App\Models\SiteSetting::getValue('contact_email', 'kiss.swim@gmail.com') }}">
-                            {{ App\Models\SiteSetting::getValue('contact_email', 'kiss.swim@gmail.com') }}
-                        </a>
+                        <a href="mailto:kiss.swim@gmail.com">kiss.swim@gmail.com</a>
                     </div>
                     <div class="mb-2">
                         <i class="bi bi-telephone me-2"></i>
-                        <a href="tel:{{ App\Models\SiteSetting::getValue('phone_main', '(216) 469-6400') }}">
-                            {{ App\Models\SiteSetting::getValue('phone_main', '(216) 469-6400') }}
-                        </a>
+                        <a href="tel:(216) 469-6400">(216) 469-6400</a>
                     </div>
                 </div>
                 
@@ -248,40 +210,8 @@
                 }
             });
         });
-        
-        // Video lazy loading
-        document.addEventListener('DOMContentLoaded', function() {
-            const videoContainers = document.querySelectorAll('.video-container');
-            videoContainers.forEach(container => {
-                const playButton = container.querySelector('.play-button');
-                const thumbnail = container.querySelector('.video-thumbnail');
-                
-                if (playButton) {
-                    playButton.addEventListener('click', function() {
-                        const videoUrl = this.dataset.videoUrl;
-                        if (videoUrl) {
-                            const iframe = document.createElement('iframe');
-                            iframe.src = videoUrl + '?autoplay=1';
-                            iframe.allowFullscreen = true;
-                            container.innerHTML = '';
-                            container.appendChild(iframe);
-                        }
-                    });
-                }
-            });
-        });
-        
-            // Parallax effect
-            window.addEventListener('scroll', function() {
-                const parallax = document.querySelector('.parallax');
-                if (parallax) {
-                    const scrollPosition = window.pageYOffset;
-                    parallax.style.backgroundPositionY = (scrollPosition * 0.5) + 'px';
-                }
-            });
     </script>
     
-    <!-- Custom Scripts -->
     @stack('scripts')
 </body>
 </html>

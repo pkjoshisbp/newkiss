@@ -11,6 +11,7 @@ class Location extends Model
 
     protected $fillable = [
         'name',
+        'image',
         'address',
         'city',
         'state',
@@ -19,6 +20,7 @@ class Location extends Model
         'email',
         'hours',
         'notes',
+        'description',
         'latitude',
         'longitude',
         'is_active',

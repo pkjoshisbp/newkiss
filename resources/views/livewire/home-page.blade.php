@@ -13,6 +13,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- Banner shapes SVG overlay (100% width, positioned to touch menu) -->
+        <div class="banner-overlay position-absolute">
+            <img src="{{ asset('images/banner-shapes.svg') }}" alt="" class="w-100">
+        </div>
+
+        <!-- Logo and Content Overlay -->
+        <div class="container h-100 position-relative">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-6">
+                    <!-- Logo (smaller to fit in blue band) -->
+                    <div class="hero-logo-container mb-4">
+                        <img src="{{ asset('images/kiss-aquatics-logo.png') }}" alt="K.I.S.S. Aquatics" class="hero-logo img-fluid">
+                    </div>
+                    
+                    <!-- Headline -->
+                    <h1 class="hero-title display-3 fw-bold text-white mb-3">
+                        Survival Swimming Lessons
+                    </h1>
+                    
+                    <!-- Subtitle -->
+                    <p class="hero-subtitle lead text-white mb-4">
+                        Kids and infants safety & survival swim — teaching children to swim, float, and survive.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="/programs/survival" class="btn btn-light btn-lg px-4 py-3">
+                            Learn More
+                        </a>
+                        <a href="https://momence.com/kiss-aquatics" target="_blank" class="btn btn-warning btn-lg px-4 py-3 text-dark fw-bold">
+                            Book Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     {{-- Programs Overview --}}
@@ -64,12 +101,21 @@
                 @foreach($locations as $location)
                 <div class="col-md-6 col-lg-3">
                     <div class="card text-center h-100 shadow-hover location-card">
-                        <div class="card-body">
-                            <div class="location-icon mb-3">
-                                <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                        @if($location->image)
+                            <img src="{{ asset('storage/' . $location->image) }}" class="card-img-top location-image" alt="{{ $location->name }}">
+                        @else
+                            <div class="location-icon-header">
+                                <i class="fas fa-map-marker-alt fa-3x text-white"></i>
                             </div>
-                            <h4 class="card-title">{{ $location->name }}</h4>
-                            <p class="card-text text-muted">{{ $location->address }}</p>
+                        @endif
+                        <div class="card-body">
+                            <h4 class="card-title mb-2">{{ $location->name }}</h4>
+                            <p class="card-text text-muted small mb-1">
+                                <i class="fas fa-envelope me-1"></i>{{ $location->email }}
+                            </p>
+                            @if($location->description)
+                                <p class="card-text text-muted small mb-3">{{ $location->description }}</p>
+                            @endif
                             <div class="mt-auto">
                                 <a href="tel:{{ $location->phone }}" class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-phone me-1"></i>{{ $location->phone }}
@@ -174,8 +220,8 @@
 <style>
 /* Hero Section Styles */
 .fw-hero { 
-    height: 78vh; 
-    min-height: 520px; 
+    height: 80vh; 
+    min-height: 600px; 
 }
 
 .hero { 
@@ -192,6 +238,48 @@
     inset: 0; 
     background-size: cover; 
     background-position: center; 
+}
+
+/* Banner overlay - 100% width, positioned -75px from top so yellow band touches menu */
+.banner-overlay {
+    width: 100%;
+    top: -75px; /* Move up 75px to connect yellow band with menu */
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.banner-overlay img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.7; /* 70% opacity */
+}
+
+/* Hero content styling */
+.hero .container {
+    z-index: 3;
+}
+
+.hero-logo-container {
+    max-width: 180px; /* Smaller logo to fit in blue band */
+    margin-top: -20px; /* Shift logo up by 20px */
+}
+
+.hero-logo {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.hero-title {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1.25rem;
 }
 
 /* Smooth crossfade */
@@ -221,9 +309,40 @@
 }
 
 /* Responsive refinements */
+@media (max-width: 991.98px) {
+    .banner-overlay {
+        width: 100%;
+    }
+    
+    .hero-logo-container {
+        max-width: 140px; /* Smaller on tablets */
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
 @media (max-width: 575.98px) {
     .fw-hero { 
-        height: 68vh; 
+        height: 70vh; 
+        min-height: 500px;
+    }
+    
+    .banner-overlay {
+        width: 100%;
+    }
+    
+    .hero-logo-container {
+        max-width: 110px; /* Smaller on mobile */
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
     }
 }
 
@@ -244,7 +363,21 @@
 
 .location-card {
     border: none;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    overflow: hidden;
+}
+
+.location-image {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.location-icon-header {
+    height: 180px;
+    background: linear-gradient(135deg, #469EDE, #3A8AC9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .location-icon {

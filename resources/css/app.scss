@@ -475,3 +475,70 @@ body {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E") no-repeat center bottom;
   background-size: cover;
 }
+
+// Updated Navigation Styles (swimfloatswim.com inspired)
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  
+  &.navbar-dark {
+    .nav-link {
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1.25rem !important;
+      color: #ffffff !important;
+      transition: all 0.3s ease;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: #F7CD45; /* Yellow accent */
+        transition: width 0.3s ease;
+      }
+      
+      &:hover, &.active {
+        color: #F7CD45 !important; /* Yellow on hover/active */
+        
+        &::after {
+          width: 80%;
+        }
+      }
+    }
+  }
+  
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+    
+    .dropdown-item {
+      padding: 0.75rem 1.5rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: var(--kiss-light-blue);
+        color: var(--kiss-primary-blue);
+        padding-left: 2rem;
+      }
+    }
+  }
+  
+  .btn-warning {
+    border-radius: 0.375rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(247, 205, 69, 0.4);
+    }
+  }
+}
