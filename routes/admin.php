@@ -23,6 +23,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Programs Management
     Route::get('/programs', \App\Livewire\Admin\Programs\Index::class)->name('programs');
     
+    // Instructors Management
+    Route::get('/instructors', \App\Livewire\Admin\Instructors\Index::class)->name('instructors');
+    
     // Videos Management
     Route::get('/videos', \App\Livewire\Admin\Videos\Index::class)->name('videos');
     

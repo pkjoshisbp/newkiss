@@ -105,6 +105,13 @@
                     </li>
                     
                     <li class="nav-item">
+                        <a href="{{ route('admin.instructors') }}" class="nav-link {{ request()->routeIs('admin.instructors*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                            <p>Instructors</p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
                         <a href="{{ route('admin.videos') }}" class="nav-link {{ request()->routeIs('admin.videos*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-video"></i>
                             <p>Videos</p>
