@@ -35,6 +35,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Styles -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
     
@@ -64,7 +67,7 @@
                     
                     <!-- About Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('about.*') ? 'fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle text-white {{ request()->routeIs('about.*') && !request()->routeIs('about.videos') ? 'fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
                             ABOUT
                         </a>
                         <ul class="dropdown-menu">
@@ -72,7 +75,6 @@
                             <li><a class="dropdown-item" href="{{ route('about.pricing') }}">Pricing</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.instructors') }}">Our Instructors</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.rules') }}">The Rules</a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.videos') }}">Videos</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.qa') }}">Q&A</a></li>
                         </ul>
                     </li>
@@ -86,6 +88,13 @@
                             <li><a class="dropdown-item" href="{{ route('programs.survival') }}">Survival Program</a></li>
                             <li><a class="dropdown-item" href="{{ route('programs.continuing') }}">Continuing Education</a></li>
                         </ul>
+                    </li>
+                    
+                    <!-- Videos - Top Level Menu Item -->
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->routeIs('about.videos') ? 'fw-bold' : '' }}" href="{{ route('about.videos') }}">
+                            VIDEOS
+                        </a>
                     </li>
                     
                     <li class="nav-item">

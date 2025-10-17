@@ -32,6 +32,41 @@
             </div>
         </div>
 
+        {{-- Instructors Grid --}}
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center fw-bold mb-5" style="color: #469EDE;">Meet Our Team</h2>
+                <div class="row g-4">
+                    @foreach($instructors as $instructor)
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="card instructor-card border-0 shadow-sm h-100">
+                                <div class="instructor-image-wrapper">
+                                    <img src="{{ asset($instructor->image) }}" 
+                                         alt="{{ $instructor->name }}" 
+                                         class="card-img-top instructor-image">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="fw-bold mb-2" style="color: #469EDE;">{{ $instructor->name }}</h5>
+                                    @if($instructor->title)
+                                        <p class="text-muted small mb-2">{{ $instructor->title }}</p>
+                                    @endif
+                                    @if($instructor->location)
+                                        <p class="mb-2">
+                                            <i class="fas fa-map-marker-alt" style="color: #F7CD45;"></i>
+                                            <small class="text-muted">{{ $instructor->location }}</small>
+                                        </p>
+                                    @endif
+                                    @if($instructor->bio)
+                                        <p class="small text-muted mb-0">{{ Str::limit($instructor->bio, 100) }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         {{-- Experience and Education --}}
         <div class="row mb-5">
             <div class="col-lg-10 mx-auto">
@@ -96,4 +131,37 @@
             </div>
         </div>
     </div>
+
+    <style>
+    .instructor-card {
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    .instructor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .instructor-image-wrapper {
+        overflow: hidden;
+        position: relative;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        background-color: #f8f9fa;
+    }
+
+    .instructor-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .instructor-card:hover .instructor-image {
+        transform: scale(1.05);
+    }
+    </style>
 </div>

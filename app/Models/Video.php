@@ -24,6 +24,22 @@ class Video extends Model
         'is_published' => 'boolean',
     ];
 
+    // Accessors for view compatibility
+    public function getVideoUrlAttribute()
+    {
+        return $this->url;
+    }
+
+    public function getThumbnailUrlAttribute()
+    {
+        return $this->thumbnail;
+    }
+
+    public function getStudentAgeAttribute()
+    {
+        return null; // Can be added to migration later if needed
+    }
+
     public function scopePublished($query)
     {
         return $query->where('is_published', true);

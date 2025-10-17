@@ -22,3 +22,5 @@ yarn-error.log
 /error
 /stats
 standard_index.html
+*.mp4
+

@@ -26,6 +26,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Videos Management
     Route::get('/videos', \App\Livewire\Admin\Videos\Index::class)->name('videos');
     
+    // FAQs Management
+    Route::get('/faqs', \App\Livewire\Admin\Faqs\Index::class)->name('faqs');
+    
+    // Pages Management (Rules, etc.)
+    Route::get('/pages', \App\Livewire\Admin\Pages\Index::class)->name('pages');
+    
     // Settings Management
     Route::get('/settings', \App\Livewire\Admin\Settings\Index::class)->name('settings');
 });

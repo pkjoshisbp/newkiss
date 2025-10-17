@@ -151,8 +151,8 @@
                 <div class="col-md-4">
                     <div class="card shadow-hover video-card">
                         <div class="video-wrapper">
-                            <div class="video-thumbnail" style="background-image: url('{{ $video->thumbnail_url ?: '/images/video-placeholder.jpg' }}')">
-                                <div class="play-button" wire:click="playVideo('{{ $video->video_url }}')">
+                            <div class="video-thumbnail" style="background-image: url('{{ $video->thumbnail ?? '/images/video-placeholder.jpg' }}'); background-size: cover; background-position: center;">
+                                <div class="play-button" onclick="playVideo('{{ $video->url }}', '{{ addslashes($video->title) }}', '{{ $video->type }}')">
                                     <i class="fas fa-play"></i>
                                 </div>
                             </div>
@@ -215,7 +215,20 @@
         </div>
     </section>
 
-
+    {{-- Video Modal --}}
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0" role="region" aria-label="Video player">
+                    {{-- Video content will be injected here by JavaScript --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
 <style>
 /* Hero Section Styles */
@@ -448,5 +461,62 @@
 
 <script>
 // Hero carousel initialized by Bootstrap automatically
+
+function playVideo(videoUrl, title, videoType = 'local') {
+    if (!videoUrl) {
+        alert('Video coming soon! We\'re working on adding more student demonstration videos.');
+        return;
+    }
+    
+    const modalEl = document.getElementById('videoModal');
+    const modalBody = modalEl.querySelector('.modal-body');
+    const modalTitle = document.getElementById('videoModalLabel');
+    
+    modalTitle.textContent = title;
+    
+    // Check if it's a local MP4 file or YouTube/external
+    if (videoUrl.endsWith('.mp4') || videoType === 'local') {
+        // For local MP4 files, use HTML5 video player with autoplay
+        modalBody.innerHTML = `
+            <video controls autoplay controlsList="nodownload" style="width: 100%; height: auto; max-height: 80vh; background: #000;" aria-label="${title}">
+                <source src="${videoUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        `;
+    } else {
+        // For YouTube or other embed URLs with autoplay
+        let embedUrl = videoUrl;
+        if (videoUrl.includes('youtube.com/watch')) {
+            const videoId = videoUrl.split('v=')[1].split('&')[0];
+            embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        } else if (videoUrl.includes('youtu.be/')) {
+            const videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+            embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        } else if (videoUrl.includes('vimeo.com/')) {
+            const videoId = videoUrl.split('vimeo.com/')[1].split('?')[0];
+            embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        }
+        
+        modalBody.innerHTML = `
+            <div class="ratio ratio-16x9">
+                <iframe src="${embedUrl}" allowfullscreen title="${title}"></iframe>
+            </div>
+        `;
+    }
+    
+    // Show modal using Bootstrap 5 API (now globally available)
+    const modal = new window.bootstrap.Modal(modalEl);
+    modal.show();
+    
+    // Clear video when modal is closed and stop playback
+    modalEl.addEventListener('hidden.bs.modal', function () {
+        const video = modalBody.querySelector('video');
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+        modalBody.innerHTML = '';
+    }, { once: true });
+}
 </script>
 </div>

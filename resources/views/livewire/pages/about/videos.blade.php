@@ -14,31 +14,33 @@
     {{-- Videos Grid --}}
     @php
         $videos = App\Models\Video::where('is_published', true)->orderBy('sort_order')->get();
+        // Shuffle videos based on current date (same order all day)
+        $seed = (int)date('Ymd');
+        $videosArray = $videos->toArray();
+        srand($seed);
+        shuffle($videosArray);
+        $videos = collect($videosArray);
     @endphp
 
     @if($videos->count() > 0)
     <div class="row g-4">
-        @foreach($videos as $video)
-        <div class="col-md-6 col-lg-4">
+        @foreach($videos as $index => $video)
+        @php
+            $videoObj = (object)$video;
+            $colClass = $index === 0 ? 'col-12' : 'col-md-6 col-lg-4';
+        @endphp
+        <div class="{{ $colClass }}">
             <div class="card shadow-hover video-card h-100">
-                <div class="video-wrapper">
-                    <div class="video-thumbnail" style="background-image: url('{{ $video->thumbnail_url ?: '/images/video-placeholder.jpg' }}')">
-                        <div class="play-button" onclick="playVideo('{{ $video->video_url }}', '{{ $video->title }}')">
+                <div class="video-wrapper {{ $index === 0 ? 'featured-video' : '' }}">
+                    <div class="video-thumbnail" style="background-image: url('{{ $videoObj->thumbnail ?? '/images/video-placeholder.jpg' }}'); background-size: cover; background-position: center;">
+                        <div class="play-button" onclick="playVideo('{{ $videoObj->url }}', '{{ addslashes($videoObj->title) }}', '{{ $videoObj->type }}')">
                             <i class="fas fa-play"></i>
                         </div>
-                        @if($video->duration)
-                        <span class="video-duration">{{ $video->duration }}</span>
-                        @endif
                     </div>
                 </div>
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ $video->title }}</h5>
-                    <p class="card-text flex-grow-1">{{ $video->description }}</p>
-                    @if($video->student_age)
-                    <div class="mt-auto">
-                        <span class="badge bg-primary">Age {{ $video->student_age }}</span>
-                    </div>
-                    @endif
+                    <h5 class="card-title">{{ $videoObj->title }}</h5>
+                    <p class="card-text flex-grow-1">{{ $videoObj->description }}</p>
                 </div>
             </div>
         </div>
@@ -177,16 +179,14 @@
 
     {{-- Video Modal --}}
     <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="videoModalLabel">Video</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-0">
-                    <div class="ratio ratio-16x9">
-                        <iframe id="videoFrame" src="" allowfullscreen></iframe>
-                    </div>
+                <div class="modal-body p-0" role="region" aria-label="Video player">
+                    {{-- Video content will be injected here by JavaScript --}}
                 </div>
             </div>
         </div>
@@ -249,27 +249,34 @@
     position: relative;
 }
 
+.featured-video .video-thumbnail {
+    height: 400px;
+}
+
 .play-button {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.9);
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .play-button:hover {
     background: white;
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .play-button i {
-    color: var(--kiss-primary-blue);
-    font-size: 1.5rem;
-    margin-left: 3px;
+    color: #469EDE;
+    font-size: 2rem;
+    margin-left: 5px;
 }
 
 .video-duration {
@@ -318,31 +325,61 @@
 
 @push('scripts')
 <script>
-function playVideo(videoUrl, title) {
-    if (videoUrl) {
-        // Convert YouTube watch URLs to embed URLs
+function playVideo(videoUrl, title, videoType = 'local') {
+    if (!videoUrl) {
+        alert('Video coming soon! We\'re working on adding more student demonstration videos.');
+        return;
+    }
+    
+    const modalEl = document.getElementById('videoModal');
+    const modalBody = modalEl.querySelector('.modal-body');
+    const modalTitle = document.getElementById('videoModalLabel');
+    
+    modalTitle.textContent = title;
+    
+    // Check if it's a local MP4 file or YouTube/external
+    if (videoUrl.endsWith('.mp4') || videoType === 'local') {
+        // For local MP4 files, use HTML5 video player with autoplay
+        modalBody.innerHTML = `
+            <video controls autoplay controlsList="nodownload" style="width: 100%; height: auto; max-height: 80vh; background: #000;" aria-label="${title}">
+                <source src="${videoUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        `;
+    } else {
+        // For YouTube or other embed URLs with autoplay
         let embedUrl = videoUrl;
         if (videoUrl.includes('youtube.com/watch')) {
-            const videoId = videoUrl.split('v=')[1];
-            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            const videoId = videoUrl.split('v=')[1].split('&')[0];
+            embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
         } else if (videoUrl.includes('youtu.be/')) {
-            const videoId = videoUrl.split('youtu.be/')[1];
-            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            const videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+            embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        } else if (videoUrl.includes('vimeo.com/')) {
+            const videoId = videoUrl.split('vimeo.com/')[1].split('?')[0];
+            embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
         }
         
-        document.getElementById('videoModalLabel').textContent = title;
-        document.getElementById('videoFrame').src = embedUrl;
-        
-        const modal = new bootstrap.Modal(document.getElementById('videoModal'));
-        modal.show();
-        
-        // Clear video when modal is closed
-        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
-            document.getElementById('videoFrame').src = '';
-        });
-    } else {
-        alert('Video coming soon! We\'re working on adding more student demonstration videos.');
+        modalBody.innerHTML = `
+            <div class="ratio ratio-16x9">
+                <iframe src="${embedUrl}" allowfullscreen title="${title}"></iframe>
+            </div>
+        `;
     }
+    
+    // Show modal using Bootstrap 5 API (now globally available)
+    const modal = new window.bootstrap.Modal(modalEl);
+    modal.show();
+    
+    // Clear video when modal is closed and stop playback
+    modalEl.addEventListener('hidden.bs.modal', function () {
+        const video = modalBody.querySelector('video');
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+        modalBody.innerHTML = '';
+    }, { once: true });
 }
 </script>
 @endpush
