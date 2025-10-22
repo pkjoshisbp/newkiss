@@ -32,6 +32,29 @@
             </div>
         </div>
 
+        {{-- Experience and Education --}}
+        <div class="row mb-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="card border-0 bg-light">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-start mb-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: #469EDE !important;">
+                                    <i class="fas fa-graduation-cap fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-4">
+                                <h3 class="fw-bold mb-3" style="color: #469EDE;">EXPERIENCE AND EDUCATION</h3>
+                                <p class="text-muted mb-0">
+                                    Each instructor has over 175 hours of in-water training and education in child development and behavior. Combining our years of experience and educational background with the physics of swimming, we offer safe and comprehensive swimming lessons. All trainers of the Kiss Aquatics program have a teaching style and experience that enables them to determine the most effective way to teach your child to swim.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- Instructors Grid --}}
         <div class="row mb-5">
             <div class="col-12">
@@ -63,29 +86,6 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
-            </div>
-        </div>
-
-        {{-- Experience and Education --}}
-        <div class="row mb-5">
-            <div class="col-lg-10 mx-auto">
-                <div class="card border-0 bg-light">
-                    <div class="card-body p-5">
-                        <div class="d-flex align-items-start mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: #469EDE !important;">
-                                    <i class="fas fa-graduation-cap fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 ms-4">
-                                <h3 class="fw-bold mb-3" style="color: #469EDE;">EXPERIENCE AND EDUCATION</h3>
-                                <p class="text-muted mb-0">
-                                    Each instructor has over 175 hours of in-water training and education in child development and behavior. Combining our years of experience and educational background with the physics of swimming, we offer safe and comprehensive swimming lessons. All trainers of the Kiss Aquatics program have a teaching style and experience that enables them to determine the most effective way to teach your child to swim.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
