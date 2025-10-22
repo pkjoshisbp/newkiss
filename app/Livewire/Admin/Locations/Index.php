@@ -34,8 +34,8 @@ class Index extends Component
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'email' => 'required|string|max:500', // Allow comma-separated emails
+            'phone' => 'nullable|string|max:100', // Allow comma-separated phone numbers
             'address' => 'required|string|max:500',
             'city' => 'required|string|max:100',
             'state' => 'required|string|max:2',
