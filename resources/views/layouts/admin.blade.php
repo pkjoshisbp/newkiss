@@ -77,6 +77,13 @@
                     <li class="nav-header">CONTENT MANAGEMENT</li>
                     
                     <li class="nav-item">
+                        <a href="{{ route('admin.homepage') }}" class="nav-link {{ request()->routeIs('admin.homepage*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>Home Page</p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
                         <a href="{{ route('admin.slides') }}" class="nav-link {{ request()->routeIs('admin.slides*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-images"></i>
                             <p>Hero Slides</p>
@@ -87,6 +94,13 @@
                         <a href="{{ route('admin.programs') }}" class="nav-link {{ request()->routeIs('admin.programs*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-swimming-pool"></i>
                             <p>Programs</p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ route('admin.program-skills') }}" class="nav-link {{ request()->routeIs('admin.program-skills*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-star"></i>
+                            <p>Program Skills</p>
                         </a>
                     </li>
                     

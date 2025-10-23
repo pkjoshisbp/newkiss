@@ -57,116 +57,31 @@
     </div>
 
     {{-- Key Skills Section --}}
+    @if($program->skills && $program->skills->count() > 0)
     <div class="row mb-5">
         <div class="col-12">
             <h2 class="text-center text-primary mb-4">
                 <i class="fas fa-star me-2"></i>Key Skills Your Child Will Learn
             </h2>
             <div class="row g-4">
+                @foreach($program->skills as $skill)
                 <div class="col-md-6 col-lg-3">
                     <div class="card text-center h-100 skill-card">
                         <div class="card-body">
                             <div class="skill-icon mb-3">
-                                <i class="fas fa-swimmer fa-2x"></i>
+                                <i class="{{ $skill->icon }} fa-2x"></i>
                             </div>
-                            <h4 class="card-title">Breath Control</h4>
-                            <p class="card-text">
-                                Learning to get the face wet and learn to hold their breath.
-                            </p>
+                            <h4 class="card-title">{{ $skill->title }}</h4>
+                            <p class="card-text">{{ $skill->description }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card text-center h-100 skill-card">
-                        <div class="card-body">
-                            <div class="skill-icon mb-3">
-                                <i class="fas fa-water fa-2x"></i>
-                            </div>
-                            <h4 class="card-title">Back Float</h4>
-                            <p class="card-text">
-                                Comfort laying down on float independently and trust the float for safety.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card text-center h-100 skill-card">
-                        <div class="card-body">
-                            <div class="skill-icon mb-3">
-                                <i class="fas fa-lungs fa-2x"></i>
-                            </div>
-                            <h4 class="card-title">Transitions</h4>
-                            <p class="card-text">
-                                Ability to roll over or rotate into a back float position.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card text-center h-100 skill-card">
-                        <div class="card-body">
-                            <div class="skill-icon mb-3">
-                                <i class="fas fa-life-ring fa-2x"></i>
-                            </div>
-                            <h4 class="card-title">Survival</h4>
-                            <p class="card-text">
-                                Simulation of a real water accident for ultimate training.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
     @endif
-
-    {{-- Age Groups --}}
-    <div class="row mb-5">
-        <div class="col-lg-10 mx-auto">
-            <div class="card border-0 bg-light">
-                <div class="card-body p-4">
-                    <h3 class="text-center text-primary mb-4">
-                        <i class="fas fa-users me-2"></i>Age Groups & Program Details
-                    </h3>
-                    <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="text-center">
-                                <div class="age-badge mb-3">
-                                    <span class="badge bg-primary fs-6 px-3 py-2">6 months - 2 years</span>
-                                </div>
-                                <h5>Infant & Toddler</h5>
-                                <p class="text-muted small">
-                                    Introduction to water safety and basic floating skills with parent participation.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center">
-                                <div class="age-badge mb-3">
-                                    <span class="badge bg-primary fs-6 px-3 py-2">2 - 6 years</span>
-                                </div>
-                                <h5>Preschool</h5>
-                                <p class="text-muted small">
-                                    Independent floating and swimming skills development with safety focus.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="text-center">
-                                <div class="age-badge mb-3">
-                                    <span class="badge bg-primary fs-6 px-3 py-2">6+ years</span>
-                                </div>
-                                <h5>School Age & Adults</h5>
-                                <p class="text-muted small">
-                                    Advanced survival techniques and stroke refinement for all skill levels.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endif
 
     {{-- Statistics Alert --}}
     <div class="row mb-5">

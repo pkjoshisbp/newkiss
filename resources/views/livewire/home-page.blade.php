@@ -57,10 +57,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center mb-5">
-                    <h2 class="display-5 fw-bold text-dark mb-3">Our Swimming Programs</h2>
+                    <h2 class="display-5 fw-bold text-dark mb-3">
+                        {{ $programsHeading->title ?? 'Private 1 on 1 Swim Programs' }}
+                    </h2>
+                    @if($programsHeading && $programsHeading->subtitle)
                     <p class="lead text-muted">
-                        We offer two specialized programs designed to teach essential water safety and swimming skills.
+                        {{ $programsHeading->subtitle }}
                     </p>
+                    @endif
                 </div>
             </div>
             <div class="row g-4 justify-content-center">
@@ -105,21 +109,38 @@
                             <img src="{{ asset('storage/' . $location->image) }}" class="card-img-top location-image" alt="{{ $location->name }}">
                         @else
                             <div class="location-icon-header">
-                                <i class="fas fa-map-marker-alt fa-3x text-white"></i>
+                                <i class="fas fa-swimming-pool fa-3x text-white"></i>
                             </div>
                         @endif
                         <div class="card-body">
                             <h4 class="card-title mb-2">{{ $location->name }}</h4>
-                            <p class="card-text text-muted small mb-1">
-                                <i class="fas fa-envelope me-1"></i>{{ $location->email }}
-                            </p>
+                            
+                            @if($location->email)
+                                @php
+                                    $emails = array_map('trim', explode(',', $location->email));
+                                @endphp
+                                @foreach($emails as $email)
+                                    <p class="card-text text-muted small mb-1">
+                                        <i class="fas fa-envelope me-1"></i>{{ $email }}
+                                    </p>
+                                @endforeach
+                            @endif
+                            
                             @if($location->description)
                                 <p class="card-text text-muted small mb-3">{{ $location->description }}</p>
                             @endif
+                            
                             <div class="mt-auto">
-                                <a href="tel:{{ $location->phone }}" class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-phone me-1"></i>{{ $location->phone }}
-                                </a>
+                                @if($location->phone)
+                                    @php
+                                        $phones = array_map('trim', explode(',', $location->phone));
+                                    @endphp
+                                    @foreach($phones as $phone)
+                                        <a href="tel:{{ $phone }}" class="btn btn-outline-primary btn-sm d-block mb-1" style="width: fit-content; margin: 0 auto;">
+                                            <i class="fas fa-phone me-1"></i>{{ $phone }}
+                                        </a>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -179,10 +200,22 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h2 class="h3 mb-3">Every Second Counts in Water Safety</h2>
+                    <h2 class="h3 mb-3">{{ $safetyBanner->title ?? 'Every Second Counts in Water Safety' }}</h2>
                     <p class="mb-4">
-                        <strong>Drowning is the leading cause of death for children ages 1-4</strong> and the second leading cause of unintentional injury death for children ages 5-14. Don't wait - give your child the life-saving skills they need.
+                        @if($safetyBanner && $safetyBanner->content)
+                            {!! $safetyBanner->content !!}
+                        @else
+                            <strong>Drowning is the leading cause of death for children ages 1-4</strong> and the second leading cause of unintentional injury death for children ages 5-14. Don't wait - give your child the life-saving skills they need.
+                        @endif
                     </p>
+                    @if($safetyBanner && $safetyBanner->button_link)
+                    <p class="mb-0">
+                        <a href="{{ $safetyBanner->button_link }}" target="_blank" class="text-white text-decoration-underline">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            {{ $safetyBanner->button_text ?? 'Learn more from the CDC' }}
+                        </a>
+                    </p>
+                    @endif
                 </div>
                 <div class="col-lg-4 text-lg-end">
                     <a href="https://momence.com/kiss-aquatics" target="_blank" class="btn btn-accent btn-lg px-4 py-3">

@@ -10,7 +10,11 @@ class Survival extends Component
 {
     public function render()
     {
-        $program = Program::where('slug', 'survival')->firstOrFail();
+        $program = Program::with(['skills' => function($query) {
+            $query->active()->ordered();
+        }])
+        ->where('slug', 'survival')
+        ->firstOrFail();
         
         $locations = Location::with(['pricingPlans' => function($query) {
             $query->where('is_active', true)

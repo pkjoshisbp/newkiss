@@ -45,8 +45,11 @@
                             </div>
                             <div class="flex-grow-1 ms-4">
                                 <h3 class="fw-bold mb-3" style="color: #469EDE;">EXPERIENCE AND EDUCATION</h3>
-                                <p class="text-muted mb-0">
+                                <p class="text-muted mb-3">
                                     Each instructor has over 175 hours of in-water training and education in child development and behavior. Combining our years of experience and educational background with the physics of swimming, we offer safe and comprehensive swimming lessons. All trainers of the Kiss Aquatics program have a teaching style and experience that enables them to determine the most effective way to teach your child to swim.
+                                </p>
+                                <p class="text-muted mb-0">
+                                    <strong>Our instructors teach an average of 4,000-5,000 lessons a year and this is our full time career. K.I.S.S. Swim teaches around 45,000 swim lessons every year!!!</strong>
                                 </p>
                             </div>
                         </div>
@@ -73,14 +76,8 @@
                                     @if($instructor->title)
                                         <p class="text-muted small mb-2">{{ $instructor->title }}</p>
                                     @endif
-                                    @if($instructor->location)
-                                        <p class="mb-2">
-                                            <i class="fas fa-map-marker-alt" style="color: #F7CD45;"></i>
-                                            <small class="text-muted">{{ $instructor->location }}</small>
-                                        </p>
-                                    @endif
                                     @if($instructor->bio)
-                                        <p class="small text-muted mb-0">{{ Str::limit($instructor->bio, 100) }}</p>
+                                        <p class="small text-muted mb-0">{{ $instructor->bio }}</p>
                                     @endif
                                 </div>
                             </div>

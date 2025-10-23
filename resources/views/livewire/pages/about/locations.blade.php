@@ -10,6 +10,26 @@
             </div>
         </div>
 
+        {{-- Warning Banner --}}
+        <div class="row mb-4">
+            <div class="col-lg-10 mx-auto">
+                <div class="alert alert-warning border-0 shadow-sm">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+                        </div>
+                        <div class="col-md-10">
+                            <h4 class="alert-heading text-warning mb-2">Critical Water Safety Facts</h4>
+                            <p class="mb-0">
+                                <strong>More children ages 1–4 die from drowning than any other cause of death.</strong> 
+                                It can happen quickly and quietly - often in less than 20 seconds. Don't wait - give your child the life-saving skills they need.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- Locations Grid --}}
         <div class="row g-4">
             @foreach($locations as $location)

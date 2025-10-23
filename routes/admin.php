@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', \App\Livewire\Admin\Dashboard::class)->name('dashboard');
     
+    // Home Page Management
+    Route::get('/homepage', \App\Livewire\Admin\HomePageManagement\Index::class)->name('homepage');
+    
     // Slides Management
     Route::get('/slides', \App\Livewire\Admin\Slides\Index::class)->name('slides');
     
@@ -22,6 +25,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     
     // Programs Management
     Route::get('/programs', \App\Livewire\Admin\Programs\Index::class)->name('programs');
+    
+    // Program Skills Management
+    Route::get('/program-skills', \App\Livewire\Admin\ProgramSkills\Index::class)->name('program-skills');
     
     // Instructors Management
     Route::get('/instructors', \App\Livewire\Admin\Instructors\Index::class)->name('instructors');

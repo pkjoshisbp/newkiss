@@ -39,4 +39,9 @@ class Program extends Model
     {
         return $this->hasMany(PricingPlan::class);
     }
+
+    public function skills()
+    {
+        return $this->hasMany(ProgramSkill::class);
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Program;
 use App\Models\Location;
 use App\Models\Video;
 use App\Models\SiteSetting;
+use App\Models\HomePageContent;
 
 class HomePage extends Component
 {
@@ -35,7 +36,12 @@ class HomePage extends Component
             [ 'src' => asset('images/hero/Raegan.jpg'), 'alt' => 'Raegan' ],
         ];
 
-        return view('livewire.home-page', compact('programs', 'locations', 'featuredVideos', 'heroSlides'))
+        // Get homepage content sections
+        $heroContent = HomePageContent::getSection('hero_title');
+        $programsHeading = HomePageContent::getSection('programs_heading');
+        $safetyBanner = HomePageContent::getSection('safety_banner');
+
+        return view('livewire.home-page', compact('programs', 'locations', 'featuredVideos', 'heroSlides', 'heroContent', 'programsHeading', 'safetyBanner'))
             ->layout('layouts.app', [
                 'title' => 'K.I.S.S. Aquatics - Swimming Lessons for Water Safety & Survival',
                 'description' => 'Learn essential water safety and survival swimming skills for all ages in Northeast Ohio. Professional swim instructors teaching children to swim, float, and survive.'
