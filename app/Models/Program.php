@@ -13,6 +13,8 @@ class Program extends Model
         'name',
         'slug',
         'description',
+        'short_description',
+        'full_content',
         'features',
         'age_range',
         'lesson_count',

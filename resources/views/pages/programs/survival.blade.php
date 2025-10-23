@@ -64,9 +64,9 @@
                             <div class="skill-icon mb-3">
                                 <i class="fas fa-swimmer fa-2x"></i>
                             </div>
-                            <h4 class="card-title">Swimming</h4>
+                            <h4 class="card-title">Breath Control</h4>
                             <p class="card-text">
-                                Proper stroke technique and breathing patterns for efficient swimming.
+                                Learning to get the face wet and learn to hold their breath.
                             </p>
                         </div>
                     </div>
@@ -77,9 +77,9 @@
                             <div class="skill-icon mb-3">
                                 <i class="fas fa-water fa-2x"></i>
                             </div>
-                            <h4 class="card-title">Floating</h4>
+                            <h4 class="card-title">Back Float</h4>
                             <p class="card-text">
-                                Back floating techniques to conserve energy and stay safe in water.
+                                Comfort laying down on float independently and trust the float for safety.
                             </p>
                         </div>
                     </div>
