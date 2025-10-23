@@ -100,19 +100,6 @@
         </div>
         @endif
 
-        @if(count($programs) > 0)
-        <div class="field">
-            <div class="label">Program Interest:</div>
-            <div class="value">
-                <ul style="margin: 5px 0; padding-left: 20px;">
-                    @foreach($programs as $program)
-                        <li>{{ ucfirst($program) }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-        @endif
-
         <div class="field">
             <div class="label">Message:</div>
             <div class="value" style="white-space: pre-wrap;">{{ $message }}</div>

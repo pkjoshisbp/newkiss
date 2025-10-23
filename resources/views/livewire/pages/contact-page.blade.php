@@ -102,31 +102,6 @@
                             </div>
                             
                             <div class="col-12">
-                                <label for="program" class="form-label">Program Interest</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="survival" 
-                                                   wire:model="programs" id="programSurvival">
-                                            <label class="form-check-label" for="programSurvival">
-                                                Survival Swimming Program
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="continuing" 
-                                                   wire:model="programs" id="programContinuing">
-                                            <label class="form-check-label" for="programContinuing">
-                                                Continuing Education
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                @error('programs') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
-                            </div>
-                            
-                            <div class="col-12">
                                 <label for="message" class="form-label">Message *</label>
                                 <textarea class="form-control @error('message') is-invalid @enderror" 
                                           wire:model="message" id="message" name="message" rows="5" 

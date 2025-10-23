@@ -13,7 +13,6 @@ class ContactPage extends Component
     public $phone = '';
     public $childAge = '';
     public $location = '';
-    public $programs = [];
     public $message = '';
     
     // Bot protection fields
@@ -29,7 +28,6 @@ class ContactPage extends Component
         'phone' => 'nullable|string|max:20',
         'childAge' => 'nullable|string',
         'location' => 'nullable|string',
-        'programs' => 'nullable|array',
         'message' => 'required|string|max:2000',
         'website' => 'size:0', // Honeypot must be empty
         'captcha_answer' => 'required|integer',
@@ -72,21 +70,20 @@ class ContactPage extends Component
                 'phone' => $this->phone,
                 'childAge' => $this->childAge,
                 'location' => $this->location,
-                'programs' => $this->programs,
                 'message' => $this->message,
             ];
 
-            // You can configure the email recipient in .env
-            $recipientEmail = config('mail.contact_recipient', 'kiss.swim@gmail.com');
+            // Route email based on location
+            $recipientEmail = $this->getRecipientEmail($this->location);
             
-            Mail::send('emails.contact', $data, function($message) use ($data) {
-                $message->to(config('mail.contact_recipient', 'kiss.swim@gmail.com'))
+            Mail::send('emails.contact', $data, function($message) use ($data, $recipientEmail) {
+                $message->to($recipientEmail)
                         ->subject('New Contact Form Submission - KISS Aquatics')
                         ->replyTo($data['email'], $data['firstName'] . ' ' . $data['lastName']);
             });
 
             session()->flash('success', 'Thank you for contacting us! We will get back to you soon.');
-            $this->reset(['firstName', 'lastName', 'email', 'phone', 'childAge', 'location', 'programs', 'message', 'captcha_answer']);
+            $this->reset(['firstName', 'lastName', 'email', 'phone', 'childAge', 'location', 'message', 'captcha_answer']);
             
             // Regenerate captcha
             $this->captcha_num1 = rand(1, 10);
@@ -95,6 +92,24 @@ class ContactPage extends Component
         } catch (\Exception $e) {
             session()->flash('error', 'There was an error sending your message. Please try again or call us directly.');
         }
+    }
+
+    /**
+     * Get recipient email based on selected location
+     */
+    private function getRecipientEmail($location)
+    {
+        // Route emails based on location
+        if (stripos($location, 'Twinsburg') !== false) {
+            return 'kiss.swim.twin@gmail.com';
+        } elseif (stripos($location, 'Independence') !== false || stripos($location, 'Brooklyn') !== false) {
+            return 'kissswimna@gmail.com';
+        } elseif (stripos($location, 'Mayfield') !== false) {
+            return 'kiss.swim@gmail.com'; // Default/Mayfield
+        }
+        
+        // Default fallback
+        return config('mail.contact_recipient', 'kiss.swim@gmail.com');
     }
 
     public function render()
