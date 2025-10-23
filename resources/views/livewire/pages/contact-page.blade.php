@@ -202,9 +202,26 @@
                     <div class="mb-3 @if(!$loop->last) border-bottom pb-3 @endif">
                         <h6 class="text-primary mb-1">{{ $location->name }}</h6>
                         <p class="mb-1 small text-muted">{{ $location->city }}, {{ $location->state }}</p>
-                        <a href="tel:{{ $location->phone }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-phone me-1"></i>{{ $location->phone }}
-                        </a>
+                        @if($location->phone)
+                            @php
+                                $phones = array_map('trim', explode(',', $location->phone));
+                            @endphp
+                            @foreach($phones as $phone)
+                                <a href="tel:{{ $phone }}" class="btn btn-sm btn-outline-primary d-block mb-1" style="width: fit-content;">
+                                    <i class="fas fa-phone me-1"></i>{{ $phone }}
+                                </a>
+                            @endforeach
+                        @endif
+                        @if($location->email)
+                            @php
+                                $emails = array_map('trim', explode(',', $location->email));
+                            @endphp
+                            @foreach($emails as $email)
+                                <a href="mailto:{{ $email }}" class="btn btn-sm btn-outline-secondary d-block mb-1" style="width: fit-content;">
+                                    <i class="fas fa-envelope me-1"></i>{{ $email }}
+                                </a>
+                            @endforeach
+                        @endif
                     </div>
                     @endforeach
                 </div>
