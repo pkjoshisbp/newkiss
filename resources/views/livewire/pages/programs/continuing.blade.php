@@ -216,19 +216,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card text-center h-100 skill-card">
-                        <div class="card-body">
-                            <div class="skill-icon mb-3">
-                                <i class="fas fa-medal fa-2x"></i>
-                            </div>
-                            <h4 class="card-title">Swim Team Prep</h4>
-                            <p class="card-text">
-                                Preparation for competitive swimming, swim teams, or personal goals.
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

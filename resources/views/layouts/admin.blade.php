@@ -7,6 +7,9 @@
 
     <title>{{ $title ?? 'Admin Panel' }} - K.I.S.S. Aquatics</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -129,6 +132,20 @@
                         <a href="{{ route('admin.videos') }}" class="nav-link {{ request()->routeIs('admin.videos*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-video"></i>
                             <p>Videos</p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ route('admin.faqs') }}" class="nav-link {{ request()->routeIs('admin.faqs*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-question-circle"></i>
+                            <p>FAQs</p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ route('admin.pages') }}" class="nav-link {{ request()->routeIs('admin.pages*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>Pages (Rules)</p>
                         </a>
                     </li>
                     
